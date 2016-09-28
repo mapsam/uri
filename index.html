@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URI</title>
+</head>
+<style>
+body {
+  display: block;
+  width: 50em;
+  margin: 5em auto;
+  font-family: monospace;
+  font-size: 16px;
+}
+#uri {
+  margin: 4em auto; 
+  display: block;
+  font-size: 1.4em;
+}
+.uri-item {
+  display: inline-block;
+  /*line-height: 0;*/
+  position: relative;
+  opacity: 0.8;
+}
+.uri-item:hover {
+  opacity: 1;
+}
+.uri-item::after {
+  content: attr(data-label) " ";
+  position: absolute;
+  font-size: 0.7em;
+}
+.uri-item.right::after {
+  right: 0;
+}
+.uri-item.left::after {
+  left: 0;
+}
+.uri-item::before {
+  content: " ";
+  width: 100%;
+  position: absolute;
+  height: 3px;
+  background: grey;
+}
+.uri-item.above-low::after {
+  top: -30px;
+}
+.uri-item.above-high::after {
+  top: -60px;
+}
+.uri-item.above-low::before {
+  top: -10px;
+}
+.uri-item.above-high::before {
+  top: -40px;
+}
+.uri-item.below-low::after {
+  top: calc(100% + 15px);
+}
+.uri-item.below-high::after {
+  top: calc(100% + 55px);
+}
+.uri-item.below-low::before {
+  top: calc(100% + 10px);
+}
+.uri-item.below-high::before {
+  top: calc(100% + 35px);
+}
+
+.authority { background-color: #b5c9f1; }
+#authority::before { background: #b5c9f1; }
+#authority::after { color: #b5c9f1; }
+#authority:hover { background-color: #b5c9f1; }
+
+.scheme { background-color: #477ADE; }
+#scheme::before { background: #477ADE; }
+#scheme::after { color: #477ADE; }
+#scheme:hover { background-color: #c7d7f5; }
+
+.host { background-color: #D472A3; }
+#host::before { background: #D472A3; }
+#host::after { color: #D472A3; }
+#host:hover { background-color: #e9b8d1; }
+
+.userinfo { background-color: #17C8C1; }
+#userinfo::before { background: #17C8C1; }
+#userinfo::after { color: #17C8C1; }
+#userinfo:hover { background-color: #a2e9e6; }
+
+.path { background-color: #D47250; }
+#path::before { background: #D47250; }
+#path::after { color: #D47250; }
+#path:hover { background-color: #e9b8a7; }
+
+.query { background-color: #5BDE3C; }
+#query::before { background: #5BDE3C; }
+#query::after { color: #5BDE3C; }
+#query:hover { background-color: #bdf1b1; }
+
+.port { background-color: #D4BF52; }
+#port::before { background: #D4BF52; }
+#port::after { color: #D4BF52; }
+#port:hover { background-color: #ede5b9; }
+
+.fragment { background-color: #999; }
+#fragment::before { background: #999; }
+#fragment::after { color: #999; }
+#fragment:hover { background-color: #e5e5e5; }
+
+#username::before, #password::before { background: #c0c0c0; }
+#username::after, #password::after { color: #c0c0c0; }
+#username:hover, #password:hover { background-color: #e5e5e5; }
+
+.desc {
+  margin-bottom: 2em;
+}
+.desc h2 {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 7px;
+  display: inline-block;
+  margin: 0;
+}
+.desc p {
+  font-size: 0.9em;
+  color: #444;
+}
+</style>
+<body>
+
+<h1>Uniform Resource Identifier</h1>
+
+<div id="uri">
+  <span class="uri-item above-low left" data-label="scheme" id="scheme">http</span>://<span class="uri-item above-high left" data-label="authority" id="authority"><span class="uri-item above-low left" data-label="user info" id="userinfo"><span class="uri-item below-low right" data-label="username" id="username">usr</span>:<span class="uri-item below-low left" data-label="password" id="password">pass</span></span>@<span class="uri-item left above-low" data-label="host" id="host">example.com</span>:<span class="uri-item left above-low" data-label="port" id="port">8000</span></span><span class="uri-item left above-low" data-label="path" id="path">/path/data</span><span class="uri-item left above-low" data-label="query" id="query">?key=value</span><span class="uri-item left above-low" data-label="fragment" id="fragment">#tag</span>
+</div>
+
+<div class="desc">
+  <h2 class="scheme">scheme</h2>
+  <p>The scheme, consisting of a sequence of characters beginning with a letter and followed by any combination of letters, digits, plus (+), period (.), or hyphen (-). Although schemes are case-insensitive, the canonical form is lowercase and documents that specify schemes must do so with lowercase letters. It is followed by a colon (:). Examples of popular schemes include http, ftp, mailto, file, and data. URI schemes should be registered with the Internet Assigned Numbers Authority (IANA), although non-registered schemes are used in practice.</p>
+  <p>Two slashes (//): This is required by some schemes and not required by some others. When the authority component (explained below) is absent, the path component cannot begin with two slashes.</p>
+</div>
+
+<div class="desc">
+  <h2 class="authority">authority</h2>
+  <p>Consists of user information, host, and a port.</p>
+</div>
+
+<div class="desc">
+  <h2 class="userinfo">user info</h2>
+  <p>An optional authentication section of a user name and password, separated by a colon, followed by an at symbol (@).</p>
+</div>
+<div class="desc">
+  <h2 class="host">host</h2>
+  <p>A "host", consisting of either a registered name (including but not limited to a hostname), or an IP address. IPv4 addresses must be in dot-decimal notation, and IPv6 addresses must be enclosed in brackets ([ ]).</p>
+</div>
+<div class="desc">
+  <h2 class="port">port</h2>
+  <p>An optional port number, separated from the hostname by a colon.</p>
+</div>
+<div class="desc">
+  <h2 class="path">path</h2>
+  <p>A path, which contains data, usually organized in hierarchical form, that appears as a sequence of segments separated by slashes. Such a sequence may resemble or map exactly to a file system path, but does not always imply a relation to one.[9] The path must begin with a single slash (/) if an authority part was present, and may also if one was not, but must not begin with a double slash.</p>
+</div>
+<div class="desc">
+  <h2 class="query">query</h2>
+  <p>An optional query, separated from the preceding part by a question mark (?), containing a query string of non-hierarchical data. Its syntax is not well defined, but by convention is most often a sequence of attribute–value pairs separated by a delimiter.</p>
+</div>
+<div class="desc">
+  <h2 class="fragment">fragment</h2>
+  <p>An optional fragment, separated from the preceding part by a hash (#). The fragment contains a fragment identifier providing direction to a secondary resource, such as a section heading in an article identified by the remainder of the URI. When the primary resource is an HTML document, the fragment is often an id attribute of a specific element, and web browsers will scroll this element into view.</p>
+</div>
+
+<br><br>
+<p>Literally copied from <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Wikipedia</a>.</p>
+
+</body>
+</html>
